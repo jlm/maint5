@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  has_many :minutes
+  has_many :meetings, through: :minutes
   belongs_to :minst
   has_one :request, dependent: :destroy
   # :number, :date, :standard, :clause, :subject, :draft
@@ -6,6 +8,11 @@ class Item < ApplicationRecord
   validates :date, presence: true
   validates :standard, presence: true, length: { in: 3..50 }
   validates :subject, presence: true, length: { maximum: 200 }, unless: -> { Maint::Config::Importing }
+
+  before_save {
+    lastminst = minutes.blank? ? nil : minutes.date_valid.order(:date, :id).last.minst
+    self.minst = lastminst unless lastminst.nil?
+  }
 
   CLOSED_CODES = %w[P J W]
   scope :closed, -> { joins(:minst).where("minsts.code IN (?)", CLOSED_CODES) }
