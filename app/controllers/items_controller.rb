@@ -13,17 +13,12 @@ class ItemsController < ApplicationController
       match_string = "%#{params[:search]}%"
       @items = @items.where(t[:name].matches(match_string).or(t[:description].matches(match_string)))
     end
-    @qualifier = if params[:open].present?
-                   "Open"
-                 elsif params[:closed].present?
-                   "Closed"
-                 elsif params[:review].present?
-                   "Review"
-                 elsif params[:search].present?
-                   ""
-                 else
-                   "All"
-                 end
+    @qualifier = if params[:open].present? "Open"
+    elsif params[:closed].present? "Closed"
+    elsif params[:review].present? "Review"
+    elsif params[:search].present? ""
+    else "All"
+    end
   end
 
   def show
