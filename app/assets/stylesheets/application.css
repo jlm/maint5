@@ -19,8 +19,17 @@
   align-items: center;
 }
 
-.products-header {
+.items-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+small.status {
+    color: rgb(0,255,0);
+}
+
+.sortlink {
+    text-decoration: none;
+    font-weight: bold;
 }

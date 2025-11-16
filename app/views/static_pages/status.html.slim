@@ -1,0 +1,19 @@
+- provide(:title, "Status")
+.center.jumbotron
+  h1
+    = committee
+    |  Maintenance Status
+  table.table.table-hover
+    thead
+      tr
+        th
+          | Category
+        th
+          | Count
+    tbody
+      - @sts.each do |cat|
+        tr
+          td
+            = link_to(cat[1][0], items_path(cat: cat[0]))
+          td
+            = cat[1][1]
