@@ -9,7 +9,17 @@ Rails.application.routes.draw do
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
+  get "static_pages/help"
+  match "/help", to: "static_pages#help", via: "get"
+  match "/status", to: "static_pages#status", via: "get"
+
   # Defines the root path route ("/")
-  root to: redirect("/products")
+  root to: redirect("/items")
+  resources :items
+
+  # The list of meetings.  Each meeting displays the maintenance items which were progressed at it.
+  resources :meetings do
+    resources :motions
+  end
   resources :products
 end
