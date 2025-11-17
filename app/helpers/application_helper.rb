@@ -46,4 +46,8 @@ module ApplicationHelper
   def committee
     Maint::Config::Committee
   end
+
+  def authorised
+    true
+  end
 end

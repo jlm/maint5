@@ -5,6 +5,51 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page" = "#{@item.number}"
 h1 Minutes for #{itemlink(@item.number, @item.id)}: #{@item.subject}
 
+table.table.table-hover
+  tbody
+    tr
+      td
+        strong
+          |> Standard:
+        = @item.standard
+      td
+        strong
+          |> Clause:
+        = @item.clause
+      td
+        strong
+          |> Draft with fix:
+        = @item.draft
+      td
+        strong
+          |> Status:
+        = @item.minst.name
+    tr
+      td
+        strong
+          |> Submitter:
+        = mail_to(@item.request&.email, @item.request&.name)
+      td
+        strong
+          |> Date:
+        = @item.date
+      td[colspan="2"]
+        strong
+          |> Rationale:
+        = link_to((@item.request&.rationale || "").truncate(75), item_request_path(@item, @request),
+                data: { modal: true, toggle: :tooltip }, title: @item.request&.rationale) if @request
+    tr
+      td[colspan="4"]
+        = link_to 'Show Request', item_request_path(@item, @request), class: "btn btn-success", data: { modal: true } if @request
+        span.px-1
+        = link_to 'Show Preformatted Request', pre_item_request_path(@item, @request), class: "btn btn-primary" if @request
+        span.px-1
+        = link_to 'Add Request', new_item_request_path(@item), class: "btn btn-default", data: { modal: true } if @request.nil? and authorised
+        span.px-1
+        = link_to 'Edit Request', edit_item_request_path(@item, @request), class: "btn btn-warning", data: { modal: true } if @request and authorised
+        span.px-1
+        = link_to 'Destroy Request', [@item, @request], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } if @request and authorised
+
 table#items.table.table-hover
   thead
     tr

@@ -15,7 +15,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root to: redirect("/items")
-  resources :items
+  resources :items do
+    resources :minutes
+    resources :requests do
+      # There's an option to display a request 'pre'-formatted.
+      get "pre", on: :member
+    end
+  end
 
   # The list of meetings.  Each meeting displays the maintenance items which were progressed at it.
   resources :meetings do
