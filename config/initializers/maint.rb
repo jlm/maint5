@@ -4,6 +4,7 @@
 module Maint
   class Config
     Importing = false
-    Committee = "802.1"
+    Committee = ENV["COMMITTEE"]
+    Req_url = ENV["REQ_URL"]
   end
 end

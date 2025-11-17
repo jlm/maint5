@@ -5,6 +5,10 @@ module ApplicationHelper
     end
   end
 
+  def itemlink(num, id)
+    link_to num.to_s, Maint::Config::Req_url % id
+  end
+
   # From http://railscasts.com/episodes/228-sortable-table-columns?autoplay=true
   def sortable(column, title = nil)
     title ||= column.titleize
