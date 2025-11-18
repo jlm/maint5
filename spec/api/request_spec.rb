@@ -30,7 +30,7 @@ RSpec.describe "/items/id/requests API", type: :request do
       it "returns an HTTP Not Found status" do
         delete "/items/#{myd_item.id}/requests/98765", as: :json
         expect(response).to have_http_status(:not_found)
-        #expect { delete "/items/#{myd_item.id}/requests/98765", as: :json }.to raise_error(ActiveRecord::RecordNotFound)
+        # expect { delete "/items/#{myd_item.id}/requests/98765", as: :json }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end
 

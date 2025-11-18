@@ -11,7 +11,7 @@ RSpec.describe "/items API", type: :request do
     let(:item) { jsonrsp.first }
 
     before do
-      get "/items", params: {search: my_item.number}, headers: {"ACCEPT" => "application/json"}
+      get "/items", params: { search: my_item.number }, headers: { "ACCEPT" => "application/json" }
     end
 
     it "Get returns status code 200" do
@@ -35,8 +35,8 @@ RSpec.describe "/items API", type: :request do
     let(:item) { jsonrsp }
 
     before do
-      get "/items", params: {search: my_item.number}, headers: {"ACCEPT" => "application/json"}
-      get "/items/#{jsonrsp.first["id"]}", headers: {"ACCEPT" => "application/json"}
+      get "/items", params: { search: my_item.number }, headers: { "ACCEPT" => "application/json" }
+      get "/items/#{jsonrsp.first["id"]}", headers: { "ACCEPT" => "application/json" }
       puts item.inspect
     end
 

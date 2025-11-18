@@ -4,7 +4,7 @@ RSpec.describe "TaskGroup", type: :request do
   let!(:my_tg) { FactoryBot.create(:task_group) }
 
   before do
-    get "/task_groups", headers: {"ACCEPT" => "application/json"}
+    get "/task_groups", headers: { "ACCEPT" => "application/json" }
   end
 
   after do
@@ -23,7 +23,7 @@ RSpec.describe "TaskGroup", type: :request do
       it "includes the page URL" do
         jsonrsp.each do |rsp|
           next unless rsp["abbrev"] == my_tg.abbrev
-          get "/task_groups/#{rsp["id"]}", headers: {"ACCEPT" => "application/json"}
+          get "/task_groups/#{rsp["id"]}", headers: { "ACCEPT" => "application/json" }
           expect(jsonrsp).to include("page_url")
           expect(jsonrsp["page_url"]).to eq(my_tg.page_url)
         end
