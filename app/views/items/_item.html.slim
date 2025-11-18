@@ -12,3 +12,6 @@ tr data-testid=dom_id(item)
   td = item.clause
   td = item.subject
   td = item.draft
+  td
+    = link_to "Edit", edit_item_path(item), class: "me-2 btn btn-sm btn-outline-primary",
+            data: { turbo_frame: "remote_modal" } if authorised

@@ -1,0 +1,25 @@
+= form_with model: item do |f|
+  .mb-3
+    = f.label :date, class: "form-label"
+    = f.text_field :date, class: "form-control"
+    = errors_for item, :date
+  .mb-3
+    = f.label :standard, class: "form-label"
+    = f.text_area :standard, class: "form-control"
+    = errors_for item, :standard
+  .mb-3
+    = f.label :clause, class: "form-label"
+    = f.text_area :clause, class: "form-control"
+    = errors_for item, :clause
+  .mb-3
+    = f.label :subject, class: "form-label"
+    = f.text_area :subject, class: "form-control"
+    = errors_for item, :subject
+  .mb-3
+    = f.label "Draft with fix", class: "form-label"
+    = f.text_area :draft, class: "form-control"
+    = errors_for item, :draft
+  .mb-3
+    = f.button class: "btn btn-primary"
+    span.px-1
+    = link_to "Cancel", items_path, class: "btn btn-outline-secondary"
