@@ -48,6 +48,6 @@ module ApplicationHelper
   end
 
   def authorised
-    true
+    user_signed_in?
   end
 end
