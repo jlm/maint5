@@ -33,6 +33,7 @@ nav.navbar.navbar-expand-lg.bg-body-tertiary
           = link_to "Help", help_path, class: "nav-link"
         li.nav-item
           - if authorised
+            / https://chimkan.com/rails-7-and-devise-issue-with-sign-out/
             = link_to "Sign out", destroy_user_session_path, data: { turbo_method: :delete }, class: "nav-link"
           - else
             = link_to "Admin", user_session_path, class: "nav-link"
