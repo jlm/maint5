@@ -6,7 +6,7 @@ RSpec.configure do |config|
 end
 
 RSpec.describe "Item system", type: :system do
-  let!(:chair) { FactoryBot.create(:chair) }
+  # let!(:chair) { FactoryBot.create(:chair) }
 
   before do
     log_in_as_admin
@@ -18,7 +18,7 @@ RSpec.describe "Item system", type: :system do
     # Pointless comment
   end
 
-  context "Given a chair" do
+  context "Even without a chair" do
     it "enables me to create a new item" do
       visit "/items"
       click_on "New Item"
