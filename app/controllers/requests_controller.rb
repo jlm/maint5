@@ -1,0 +1,90 @@
+# frozen_string_literal: true
+
+class RequestsController < ApplicationController
+  before_action :set_request, only: %i[show pre edit update destroy]
+  respond_to :html, :json
+
+  # GET /items/1/requests
+  def index
+    @item = Item.find(params[:item_id])
+    @request = @item.request
+  end
+
+  # GET /items/1/requests/20
+  def show
+    @item = Item.find(params[:item_id])
+    @request = @item.request
+  end
+
+  # GET /items/1/requests/20/pre
+  # This is an additional member route, which renders pre.html.erb, and just shows the same data differently formatted.
+  def pre
+    @item = Item.find(params[:item_id])
+    @request = @item.request
+  end
+
+  # GET /items/1/requests/new
+  def new
+    @item = Item.find(params[:item_id])
+    @item.request = Request.new
+  end
+
+  # GET /items/1/requests/10/edit
+  def edit
+    @item = Item.find(params[:item_id])
+    @request = @item.request
+  end
+
+  # POST /items/1requests
+  # POST /items/1/requests.json
+  def create
+    @item = Item.find(params[:item_id])
+    @request = Request.new(request_params)
+    @request.item = @item
+    if @request.save
+      flash[:success] = "Request successfully created"
+      @item.save
+      redirect_to item_path(@item), notice: "Request successfully added!"
+    else
+      flash[:error] = @request.errors.full_messages.to_sentence
+      puts @request.errors.full_messages.to_sentence
+      render :form_update, status: :unprocessable_entity
+    end
+  end
+
+  # PATCH/PUT /items/1/requests/1
+  # PATCH/PUT /items/1/requests/1.json
+  def update
+    @item = Item.find(params[:item_id])
+    if @request.update(request_params)
+      redirect_to item_path(@item), notice: "Request successfully updated"
+    else
+      render :form_update, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /items/1/requests/1
+  # DELETE /items/1/requests/1.json
+  def destroy
+    @item = Item.find(params[:item_id])
+    @item.request= nil
+    @item.save
+    respond_to do |format|
+      format.html { redirect_to item_url(@item), notice: "Unset item #{@item.number}'s request." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def set_request
+    @request = Request.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def request_params
+    params.expect(request: [ :standard, :clauseno, :clausetitle, :name, :email, :company,
+      :rationale, :proposal, :impact, :date ])
+  end
+end
+# rubocop:enable all
