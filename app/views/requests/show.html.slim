@@ -1,0 +1,48 @@
+- provide(:title, "#{@request.item.subject}")
+= render "remote_modal", title: "#{@request.item.subject}" do
+  .card.mb-3
+    .card-header
+      | Requested revision
+    .card-body
+      table.table
+        tbody
+          tr
+            td
+              b Standard:
+            td = @request.standard
+            td
+              b Clause:
+            td = @request.clauseno
+          tr
+            td
+              b Clause title:
+            td[colspan="3"] = @request.clausetitle
+  .card.mb-3
+    .card-header Rationale for revision
+    .card-body = @request.rationale
+  .card.mb-3
+    .card-header Proposed text
+    .card-body = @request.proposal
+  .card.mb-3
+    .card-header Impact on existing networks
+    .card-body = @request.impact
+  .card.mb-3
+    .card-header Originator
+    .card-body
+      table.table
+        tbody
+          tr
+            td
+              b Name:
+            td = @request.name
+            td
+              b Email:
+            td = @request.email
+          tr
+            td
+              b Affiliation:
+            td[colspan="3"] = @request.company
+          tr
+            td
+              b Submitted:
+            td[colspan="3"] = @request.date
