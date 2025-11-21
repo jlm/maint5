@@ -37,18 +37,18 @@ table.table.table-hover
         strong
           |> Rationale:
         = link_to((@item.request&.rationale || "").truncate(75), item_request_path(@item, @request),
-                data: { modal: true, toggle: :tooltip }, title: @item.request&.rationale) if @request
+                data: { turbo_frame: "remote_modal", toggle: :tooltip }, title: @item.request&.rationale) if @request
     tr
       td[colspan="4"]
-        = link_to 'Show Request', item_request_path(@item, @request), class: "btn btn-success", data: { modal: true } if @request
+        = link_to 'Show Request', item_request_path(@item, @request), class: "btn btn-success", data: { turbo_frame: "remote_modal" }  if @request
         span.px-1
         = link_to 'Show Preformatted Request', pre_item_request_path(@item, @request), class: "btn btn-primary" if @request
         span.px-1
-        = link_to 'Add Request', new_item_request_path(@item), class: "btn btn-default", data: { modal: true } if @request.nil? and authorised
+        = link_to 'Add Request', new_item_request_path(@item), class: "btn btn-outline-primary", data: { turbo_frame: "remote_modal" }  if @request.nil? and authorised
         span.px-1
-        = link_to 'Edit Request', edit_item_request_path(@item, @request), class: "btn btn-warning", data: { modal: true } if @request and authorised
+        = link_to 'Edit Request', edit_item_request_path(@item, @request), class: "btn btn-warning", data: { turbo_frame: "remote_modal" }  if @request and authorised
         span.px-1
-        = link_to 'Destroy Request', [@item, @request], class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } if @request and authorised
+        = button_to 'Destroy Request', [@item, @request], class: "btn btn-danger", method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } if @request and authorised
 
 table#items.table.table-hover
   thead
