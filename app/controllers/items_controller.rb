@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-
+    @item.minst = Minst.find_by_code("R")
     if @item.save
       redirect_to items_path, notice: "Item successfully added!"
     else
@@ -62,7 +62,7 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.expect(item: [ :number, :latest_status, :date, :standard ])
+    params.expect(item: [ :number, :date, :standard, :clause, :subject, :draft ])
   end
 
   def set_item

@@ -4,6 +4,8 @@ nav aria-label="breadcrumb"
     li.breadcrumb-item.active aria-current="page" = @qualifier + " " + committee + " Maintenance Items"
 h1 = "#{@qualifier} #{committee} Maintenance Items"
 
+= link_to 'New Item', new_item_path, class: "btn btn-outline-primary", data: { turbo_frame: "remote_modal" } if authorised
+
 table#items.table.table-hover
   thead
     tr

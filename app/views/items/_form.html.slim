@@ -1,4 +1,9 @@
 = form_with model: item do |f|
+  - unless request.path_parameters[:action] == "edit"
+    .mb-3
+      = f.label :number, class: "form-label"
+      = f.text_field :number, class: "form-control"
+      = errors_for item, :number
   .mb-3
     = f.label :date, class: "form-label"
     = f.text_field :date, class: "form-control"
