@@ -1,0 +1,9 @@
+tr
+  td = meeting.date
+  td = meeting.meetingtype
+  td = make_meeting_name(meeting)
+  td = meeting.location
+  td = link_to 'Minutes', meeting.minutes_url, class: "btn btn-sm btn-outline-secondary"
+  td = link_to 'Show', meeting, class: "btn btn-sm btn-outline-primary"
+  td = link_to 'Edit', edit_meeting_path(meeting), class: "btn btn-sm btn-outline-warning", data: { turbo_frame: "remote_modal" } if authorised
+  td = button_to "Delete", meeting, method: :delete, class: "btn btn-sm btn-outline-danger", form: { data: { turbo_confirm: "Are you sure?" } } if authorised
