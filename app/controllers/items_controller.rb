@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if params[:search].present?
       t = @items.arel_table
       match_string = "%#{params[:search]}%"
-      @items = @items.where(t[:name].matches(match_string).or(t[:description].matches(match_string)))
+      @items = @items.where(t[:number].eq(params[:search]).or(t[:standard].matches(match_string)).or(t[:draft].matches(match_string)))
     end
     @qualifier = if params[:open].present?; "Open"
     elsif params[:closed].present?; "Closed"
