@@ -1,0 +1,55 @@
+- provide(:title, "#{@request.item.subject}")
+nav aria-label="breadcrumb"
+  ol.breadcrumb style="--bs-breadcrumb-bg: #f5f5f5; --bs-breadcrumb-border-radius: 0.4ex; --bs-breadcrumb-padding-x: 1ex;"
+    li.breadcrumb-item = link_to("Maintenance Items", items_path)
+    li.breadcrumb-item = link_to("#{@item.number}", item_path(@request.item))
+    li.breadcrumb-item.active aria-current="page" Request
+.card.mb-3
+  .card.mb-3
+    .card-header Requested revision
+    ul.list-group
+      li.list-group-item
+        .d-flex
+          .p.flex-fill
+            b Standard:
+            =< @request.standard
+          .p.flex-fill
+            b Clause:
+            =< @request.clauseno
+      li.list-group-item
+        .d-flex
+          .p.flex-fill
+            b Clause title:
+            =< @request.clausetitle
+.card.mb-3
+  .card-header.text-bg-primary Rationale for revision
+  .card-body
+    pre = @request.rationale
+.card.mb-3
+  .card-header.text-bg-success Proposed text
+  .card-body
+    pre = @request.proposal
+.card.mb-3
+  .card-header.text-bg-warning Impact on existing networks
+  .card-body = @request.impact
+.card.mb-3
+  .card-header Originator
+  ul.list-group
+    li.list-group-item
+      .d-flex
+        .p.flex-fill
+          b Name:
+          =< @request.name
+        .p.flex-fill
+          b Email:
+          =< @request.email
+    li.list-group-item
+      .d-flex
+        .p.flex-fill
+          b Affiliation:
+          =< @request.company
+    li.list-group-item
+      .d-flex
+        .p.flex-fill
+          b Submitted:
+          =< @request.date
