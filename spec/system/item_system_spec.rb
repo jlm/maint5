@@ -26,6 +26,7 @@ RSpec.describe "Item system", type: :system do
       fill_in "Standard", with: "802.1zz"
       fill_in "Clause", with: "1.2"
       fill_in "Subject", with: "A test item"
+      fill_in "Date", with: "2023-04-30"
       click_button "Create Item"
 
       expect(page).to have_text("Item successfully created") # Item successfully created.
