@@ -40,15 +40,11 @@ table.table.table-hover
                 data: { turbo_frame: "remote_modal", toggle: :tooltip }, title: @item.request&.rationale) if @request
     tr
       td[colspan="4"]
-        = link_to 'Show Request', item_request_path(@item, @request), class: "btn btn-success", data: { turbo_frame: "remote_modal" }  if @request
-        span.px-1
-        = link_to 'Show Preformatted Request', pre_item_request_path(@item, @request), class: "btn btn-primary" if @request
-        span.px-1
-        = link_to 'Add Request', new_item_request_path(@item), class: "btn btn-outline-primary", data: { turbo_frame: "remote_modal" }  if @request.nil? and authorised
-        span.px-1
-        = link_to 'Edit Request', edit_item_request_path(@item, @request), class: "btn btn-warning", data: { turbo_frame: "remote_modal" }  if @request and authorised
-        span.px-1
-        = button_to 'Destroy Request', [@item, @request], class: "btn btn-danger", method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } if @request and authorised
+        = link_to 'Show Request', item_request_path(@item, @request), class: "btn btn-outline-success me-1", data: { turbo_frame: "remote_modal" }  if @request
+        = link_to 'Show Preformatted Request', pre_item_request_path(@item, @request), class: "btn btn-outline-primary me-1" if @request
+        = link_to 'Add Request', new_item_request_path(@item), class: "btn btn-outline-primary me-1", data: { turbo_frame: "remote_modal" }  if @request.nil? and authorised
+        = link_to 'Edit Request', edit_item_request_path(@item, @request), class: "btn btn-outline-warning me-1", data: { turbo_frame: "remote_modal" }  if @request and authorised
+        = button_to 'Destroy Request', [@item, @request], class: "btn btn-outline-danger mt-2 me-1", method: :delete, form: { data: { turbo_confirm: "Are you sure?" } } if @request and authorised
 
 table#items.table.table-hover
   thead
@@ -57,7 +53,10 @@ table#items.table.table-hover
       th Meeting
       th Text
       th Status
-      th colspan="3"
+      th[colspan="3"]
   tbody
     - @minutes.each do |minute|
       = render minute
+= link_to 'New Minute', new_item_minute_path(@item), class: "btn btn-outline-primary me-1", data: { turbo_frame: "remote_modal" }  if authorised
+= link_to 'Edit', edit_item_path(@item), class: "btn btn-outline-warning me-1", data: { turbo_frame: "remote_modal" }  if authorised
+= link_to 'Back', items_path, class: "btn btn-outline-secondary me-1"
