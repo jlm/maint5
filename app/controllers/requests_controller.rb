@@ -26,7 +26,7 @@ class RequestsController < ApplicationController
   # GET /items/1/requests/new
   def new
     @item = Item.find(params[:item_id])
-    @item.request = Request.new
+    @request = @item.build_request
   end
 
   # GET /items/1/requests/10/edit
@@ -39,7 +39,7 @@ class RequestsController < ApplicationController
   # POST /items/1/requests.json
   def create
     @item = Item.find(params[:item_id])
-    @request = Request.new(request_params)
+    @request = @item.build_request(request_params)
     @request.item = @item
     if @request.save
       flash[:success] = "Request successfully created"
